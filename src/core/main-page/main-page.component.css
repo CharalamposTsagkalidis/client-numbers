@@ -1,0 +1,26 @@
+.main-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+h2 {
+  color: #333;
+}
+
+.number-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.number-list li {
+  background-color: #f0f0f0;
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 5px;
+}

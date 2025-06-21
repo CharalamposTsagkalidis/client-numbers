@@ -1,13 +1,14 @@
 import { CommonModule } from "@angular/common";
 import { HttpClient } from "@angular/common/http";
 import { Component, inject } from "@angular/core";
+import { FormsModule } from "@angular/forms";
 import { debounceTime, distinctUntilChanged, Subject } from "rxjs";
 @Component({
     selector: "app-main-page",
     templateUrl: "./main-page.component.html",
     styleUrls: ["./main-page.component.css"],
     standalone: true,
-    imports: [CommonModule],
+    imports: [FormsModule,CommonModule],
 })
 
 export class MainPageComponent {

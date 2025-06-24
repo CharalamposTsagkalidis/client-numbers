@@ -13,7 +13,7 @@ import { debounceTime, distinctUntilChanged, Subject } from "rxjs";
 
 export class MainPageComponent {
     private http = inject(HttpClient);
-    private url = "http://localhost:11000/api/regnonize-numbers/service/numbers";
+    private readonly url = "http://localhost:11000/api/regnonize-numbers/service/numbers";
     // This is the input field for numbers
     numberInput = '';
     naturalNumbers: number[] = [];
@@ -25,9 +25,7 @@ export class MainPageComponent {
     constructor() {
         this.inputChange
             .pipe(
-                // Add any operators you need here, e.g., debounceTime, distinctUntilChanged, etc.
-                debounceTime(1000), // Wait for 300ms pause in events
-                // Only emit if the current value is different than the last
+                debounceTime(1000), 
                 distinctUntilChanged()
             )
             .subscribe(input => {

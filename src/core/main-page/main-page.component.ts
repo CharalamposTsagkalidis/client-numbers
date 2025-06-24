@@ -80,5 +80,6 @@ export class MainPageComponent {
         this.wholeNumbers = [];
         this.realNumbers = [];
         console.log("Cleared all numbers");
+        window.location.reload(); // Reload the page to reset the state
     }
 }

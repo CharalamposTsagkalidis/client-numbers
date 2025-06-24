@@ -32,8 +32,6 @@ export class MainPageComponent {
             )
             .subscribe(input => {
                 this.processAndSend(input);
-                // You can also make an HTTP request here if needed
-                // this.http.get('your-api-endpoint').subscribe(response => { ... });
             });
     }
 
@@ -53,7 +51,8 @@ export class MainPageComponent {
             next: (response) => {
                 this.naturalNumbers = response.naturalNumbers;
                 this.wholeNumbers = response.wholeNumbers;
-                this.realNumbers = response.realNumbers;                
+                this.realNumbers = response.realNumbers;
+                
             },
             error: (error) => {
                 console.error("Error sending numbers:", error);
@@ -61,8 +60,8 @@ export class MainPageComponent {
         });
 
     }
-//return the maximum length of the arrays
-    get maxLength(): number{
+    //return the maximum length of the arrays
+    get maxLength(): number {
         return Math.max(
             this.naturalNumbers.length,
             this.wholeNumbers.length,
@@ -74,5 +73,12 @@ export class MainPageComponent {
         return Array.from({ length: this.maxLength }, (_, i) => i);
     }
 
-    clearNumbers(){}
+    clearNumbers() {
+        this.numberInput = '';
+        this.numbers = [];
+        this.naturalNumbers = [];
+        this.wholeNumbers = [];
+        this.realNumbers = [];
+        console.log("Cleared all numbers");
+    }
 }

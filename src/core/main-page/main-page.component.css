@@ -8,6 +8,21 @@
   font-family: Arial, sans-serif;
 }
 
+.main-wrapper{
+  display: flex;
+  gap:2rem;
+  padding:1rem;
+}
+
+.summary-panel {
+  width: 220px;
+  padding: 1rem;
+  border-right: 1px solid #050404;
+  background-color: #ffffff;
+  font-size: 14px;
+  color: #000000;
+}
+
 h2 {
   color: #333;
 }

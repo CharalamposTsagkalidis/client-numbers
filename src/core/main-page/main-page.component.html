@@ -1,3 +1,11 @@
+<div class="main-wrapper"> 
+  <div class="summary-panel" *ngIf="hasResponse">
+     <h3>Number Summary</h3>
+    <p>How many Natural Numbers? : {{sizeOfNaturalNumbers}}</p>
+    <p>How many Whole Numbers? : {{sizeOfWholeNumbers}}</p>
+    <p>How many Real Numbers? : {{sizeOfRealNumbers}}</p>
+
+  </div>
 <div class="main-container">
   <h2>List of Numbers</h2>
   <input
@@ -25,4 +33,5 @@
   </table>
 
   <button (click)="clearNumbers()">Clear</button>
+</div>
 </div>

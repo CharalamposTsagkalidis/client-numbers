@@ -13,7 +13,7 @@ import { debounceTime, distinctUntilChanged, Subject } from "rxjs";
 
 export class MainPageComponent {
     private http = inject(HttpClient);
-    private readonly url = "api/regnonize-numbers/service/numbers";
+    private readonly url = "http://localhost:11000/api/regnonize-numbers/service/numbers";
     // This is the input field for numbers
     numberInput = '';
     naturalNumbers: number[] = [];

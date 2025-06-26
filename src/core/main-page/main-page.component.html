@@ -1,37 +1,43 @@
-<div class="main-wrapper"> 
+<div class="main-wrapper">
   <div class="summary-panel" *ngIf="hasResponse">
-     <h3>Number Summary</h3>
+    <h3>Number Summary</h3>
     <p>How many Natural Numbers? : {{sizeOfNaturalNumbers}}</p>
     <p>How many Whole Numbers? : {{sizeOfWholeNumbers}}</p>
     <p>How many Real Numbers? : {{sizeOfRealNumbers}}</p>
 
   </div>
-<div class="main-container">
-  <h2>List of Numbers</h2>
-  <input
-  type="text"
-  [(ngModel)]="numberInput"
-  (ngModelChange)="onInputChange($event)"
-  placeholder="Enter numbers separated by commas"
-/>
+  <div class="main-container">
+    <h2>List of Numbers</h2>
+    <input type="text" [(ngModel)]="numberInput" (ngModelChange)="onInputChange($event)"
+      placeholder="Enter numbers separated by commas" />
 
-  <table>
-    <thead>
-      <tr>
-        <th>Natural Numbers</th>
-        <th>Whole Numbers</th>
-        <th>Real Numbers</th>
-      </tr>
-    </thead>
-    <tbody>
+    <table>
+      <thead>
+        <tr>
+          <th>Natural Numbers</th>
+          <th>Whole Numbers</th>
+          <th>Real Numbers</th>
+        </tr>
+      </thead>
+      <!--legacy way of writing-->
+      <!-- <tbody>
       <tr *ngFor="let i of indexArray">
         <td>{{ naturalNumbers[i] || '' }}</td>
         <td>{{ wholeNumbers[i] || '' }}</td>
         <td>{{ realNumbers[i] || '' }}</td>
       </tr>
-    </tbody>
-  </table>
+    </tbody> -->
+      <tbody>
+        @for (i of indexArray; track i) {
+        <tr>
+          <td>{{naturalNumbers[i] || ''}} </td>
+          <td>{{wholeNumbers[i] || ''}} </td>
+          <td>{{realNumbers[i] || ''}} </td>
+        </tr>
+      }
+      </tbody>
+    </table>
 
-  <button (click)="clearNumbers()">Clear</button>
-</div>
+    <button (click)="clearNumbers()">Clear</button>
+  </div>
 </div>

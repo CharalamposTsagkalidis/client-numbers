@@ -9,7 +9,8 @@
   <div class="main-container">
     <h2>List of Numbers</h2>
     <input type="text" [(ngModel)]="numberInput" (ngModelChange)="onInputChange($event)"
-      placeholder="Enter numbers separated by commas" />
+      placeholder="Enter numbers separated by commas"   />
+      <span class="error-message" *ngIf="errorMessage">{{errorMessage}} </span>
 
     <table>
       <thead>

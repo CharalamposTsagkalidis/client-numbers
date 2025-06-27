@@ -1,6 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { HttpClient } from "@angular/common/http";
 import { Component, inject } from "@angular/core";
+import { consumerAfterComputation } from "@angular/core/primitives/signals";
 import { FormsModule } from "@angular/forms";
 import { debounceTime, distinctUntilChanged, Subject } from "rxjs";
 @Component({
@@ -14,6 +15,8 @@ import { debounceTime, distinctUntilChanged, Subject } from "rxjs";
 export class MainPageComponent {
     private http = inject(HttpClient);
     private readonly url = "http://localhost:11000/api/regnonize-numbers/service/numbers";
+    errorMessage: string | null = null;
+    private errorTimeout: any;
     // This is the input field for numbers
     numberInput = '';
     naturalNumbers: number[] = [];
@@ -36,6 +39,24 @@ export class MainPageComponent {
                 this.processAndSend(input);
             });
     }
+    checkPlaceholderViaDOM() {
+
+    } 
+    private setError(message: string) {
+        this.errorMessage = message;
+        if (this.errorTimeout) {
+            clearTimeout(this.errorTimeout);
+        }
+
+        this.errorTimeout = setTimeout(() => {
+            this.clearError();
+        }, 5000); // Clear the error after 5 seconds
+
+    }
+
+    private clearError() {
+        this.errorMessage = null;
+    }
 
     onInputChange(value: string) {
         this.numberInput = value; // Update the input field value
@@ -45,11 +66,15 @@ export class MainPageComponent {
 
     processAndSend(input: string) {
         //const nums = input.split(",").map(num => Number(num.trim())).filter(num => !isNaN(num));
-        const nums = input.split(",").map(num => num.trim().replace(/"/g, ''));
+        const nums = input.split(",").map(num => num.trim().replace(/"/g, '')).filter(num => num !== '');
         //this.numbers = [nums].flat();
         this.numbers = nums;
-
-        this.http.post<{ naturalNumbers: number[], wholeNumbers: number[], realNumbers: number[], sizeOfNaturalNumbers:number,sizeOfWholeNumbers:number,sizeOfRealNumbers:number }>(this.url, { numbers: this.numbers }).subscribe({
+        if(this.numbers.length > 500) {
+            console.log("Input is too long, setting error message.");
+            this.setError("Input is too long. Please limit to 500 characters.");
+            return;
+        }
+        this.http.post<{ naturalNumbers: number[], wholeNumbers: number[], realNumbers: number[], sizeOfNaturalNumbers: number, sizeOfWholeNumbers: number, sizeOfRealNumbers: number }>(this.url, { numbers: this.numbers }).subscribe({
             next: (response) => {
                 this.naturalNumbers = response.naturalNumbers;
                 this.wholeNumbers = response.wholeNumbers;

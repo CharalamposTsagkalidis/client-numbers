@@ -36,14 +36,22 @@ export class MainPageComponent {
                 distinctUntilChanged()
             )
             .subscribe(input => {
+                const trimCommas = input.split(",");
+                if (trimCommas.length > 500) {
+                    this.setError("Input is too long. Please limit to 500 characters.");
+                    return;
+                }
+
                 this.processAndSend(input);
             });
     }
     checkPlaceholderViaDOM() {
 
-    } 
+    }
     private setError(message: string) {
         this.errorMessage = message;
+        this.numberInput = ''; // Clear the input field
+
         if (this.errorTimeout) {
             clearTimeout(this.errorTimeout);
         }
@@ -69,11 +77,7 @@ export class MainPageComponent {
         const nums = input.split(",").map(num => num.trim().replace(/"/g, '')).filter(num => num !== '');
         //this.numbers = [nums].flat();
         this.numbers = nums;
-        if(this.numbers.length > 500) {
-            console.log("Input is too long, setting error message.");
-            this.setError("Input is too long. Please limit to 500 characters.");
-            return;
-        }
+
         this.http.post<{ naturalNumbers: number[], wholeNumbers: number[], realNumbers: number[], sizeOfNaturalNumbers: number, sizeOfWholeNumbers: number, sizeOfRealNumbers: number }>(this.url, { numbers: this.numbers }).subscribe({
             next: (response) => {
                 this.naturalNumbers = response.naturalNumbers;

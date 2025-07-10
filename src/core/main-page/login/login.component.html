@@ -1,0 +1,20 @@
+<form (ngSubmit)="login()" #loginForm="ngForm" autocomplete="on">
+  <input type="text" name="username" [(ngModel)]="username" placeholder="Username" required
+    autocomplete="username" maxlength="100" minlength="3" pattern="[a-zA-Z0-9_]+"
+  />
+  <input type="password" name="password" [(ngModel)]="password" placeholder="Password" required 
+    autocomplete="current-password" maxlength="64" minlength="8"
+  />
+
+  <ul class="password-rules">
+    <li [class.valid]="hasMinLength">✔ At least 8 characters</li>
+    <li [class.valid]="hasUppercase">✔ At least one uppercase letter</li>
+    <li [class.valid]="hasSymbolOrNumber">✔ At least one number or symbol</li>
+  </ul>
+
+
+  <button (click)="login()" type="submit">Login</button>
+</form>
+<!---
+-->
+<div *ngIf="loginFailed" style="color:red" >Invalid username or password</div>

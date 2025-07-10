@@ -4,9 +4,8 @@ export const routes: Routes = [
     //this is main page but is going to be in parent route
     
    {path: '', component:MainPageComponent},
-   {path: 'app', loadComponent: () => import('../app/app').then(m => m.App)
-
-   },
+   {path:'login',loadComponent: () => import('../core/main-page/login/login.component').then(m => m.LoginComponent)},
+   {path: 'app', loadComponent: () => import('../app/app').then(m => m.App)},
    {path: '**', redirectTo: ''}
 
     

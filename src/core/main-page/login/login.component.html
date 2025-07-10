@@ -5,6 +5,20 @@
   <input type="password" name="password" [(ngModel)]="password" placeholder="Password" required 
     autocomplete="current-password" maxlength="64" minlength="8"
   />
+  <div *ngIf="password">
+    <div class="strenght-bar">
+      <div class="strenght-level"  [ngClass] = "getPasswordStrength()">
+     
+
+      </div>
+
+    </div>
+
+<p class="strenght-label">
+  Strength: {{ getPasswordStrength() | titlecase }}
+</p>
+
+  </div>
 
   <ul class="password-rules">
     <li [class.valid]="hasMinLength">✔ At least 8 characters</li>

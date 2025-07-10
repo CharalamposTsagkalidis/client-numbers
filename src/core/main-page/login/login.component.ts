@@ -52,5 +52,17 @@ export class LoginComponent {
             console.log("Login failed. Password does not meet requirements.");
         }
     }
+
+    getPasswordStrength(): 'weak' | 'medium' | 'strong' | 'empty' {
+        const pwd = this.password;
+        if(!pwd || pwd.length ===0) return 'empty';
+        let score =0;
+        if(pwd.length >= 8) score ++;
+        if (/[0-9]/.test(pwd) || /[!@#$%^&*]/.test(pwd)) score++;
+        if(score <=1) return "weak";
+        if(score === 2) return "medium";
+        
+        return "strong";
+    }
 }
 

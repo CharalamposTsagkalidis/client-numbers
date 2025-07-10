@@ -44,3 +44,38 @@ div[style*="color:red"] {
   text-align: center;
   font-weight: 500;
 }
+
+.strenght-bar {
+  height: 8px;
+  width: 100%;
+  background-color: #ddd;
+  border-radius: 4px;
+  margin-top: 5px;
+  overflow: hidden;
+}
+
+.strenght-level {
+  height: 100%;
+  width: 100%;
+  transition: background-color 0.3s;
+}
+
+.weak {
+  background-color: red;
+  width: 33%;
+}
+
+.medium {
+  background-color: orange;
+  width: 66%;
+}
+
+.strong {
+  background-color: green;
+  width: 100%;
+}
+
+.strenght-label {
+  font-size: 12px;
+  margin-top: 4px;
+}

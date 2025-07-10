@@ -43,6 +43,18 @@ export class LoginComponent {
         return this.hasMinLength(this.password) && this.hasUppercase(this.password) && this.hasSymbolOrNumber(this.password);
     }
 
+    isUsernameValid(username:string): boolean {
+        for(let i=0; i< username.length; i++) {
+         
+        }
+        
+        if(this.username.length < 3 && this.username.length > 100) {
+            false;
+        }
+        
+        return true;
+    }
+
     login() {
         if (this.isPasswordValid()) {
             // Perform login logic here

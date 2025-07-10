@@ -59,10 +59,11 @@ export class LoginComponent {
         let score =0;
         if(pwd.length >= 8) score ++;
         if (/[0-9]/.test(pwd) || /[!@#$%^&*]/.test(pwd)) score++;
+        if (/[A-Z]/.test(pwd)) score++;
         if(score <=1) return "weak";
         if(score === 2) return "medium";
-        
-        return "strong";
+        if(score >= 3) return "strong";
+        return 'empty';
     }
 }
 

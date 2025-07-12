@@ -22,6 +22,9 @@ export class LoginComponent {
 
     loginFailed() {
         console.log("Login failed. Please check your credentials.");
+        this.username = '';
+        this.password = '';
+        
         setTimeout(() => {
             window.location.reload();
         }, 2000);

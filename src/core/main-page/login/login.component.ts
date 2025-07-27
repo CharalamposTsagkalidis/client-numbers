@@ -14,20 +14,20 @@ import { HttpClient } from "@angular/common/http";
 export class LoginComponent {
     private http = inject(HttpClient);
     private loginInterface: LoginInterface = new LoginInterface();
-    private readonly loginUrl = this.loginInterface.getLoginUrl()+'';
+    private readonly loginUrl = this.loginInterface.getLoginUrl() + '/login/';
+    private readonly loginUrl1 = "http://localhost:8080/api/login/";
     username: string = '';
     password: string = '';
 
 
-
     loginFailed() {
         console.log("Login failed. Please check your credentials.");
-        this.username = '';
-        this.password = '';
-        
-        setTimeout(() => {
-            window.location.reload();
-        }, 2000);
+        // this.username = '';
+        // this.password = '';
+
+        // setTimeout(() => {
+        //     window.location.reload();
+        // }, 2000);
     }
 
     hasMinLength(password: string): boolean {
@@ -71,11 +71,12 @@ export class LoginComponent {
         return true;
     }
 
-    sendLoginRequest(password:string,username:string) {
+    sendLoginRequest(password: string, username: string) {
         this.http.post(this.loginUrl, { password, username }).subscribe({
             next: (response) => {
                 console.log("Login request sent successfully:", response);
-                // Handle successful login response here
+                // Handle token
+                
             },
             error: (error) => {
                 console.error("Error sending login request:", error);

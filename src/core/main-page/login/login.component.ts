@@ -72,7 +72,7 @@ export class LoginComponent {
     }
 
     sendLoginRequest(password: string, username: string) {
-        this.http.post(this.loginUrl, { password, username }).subscribe({
+        this.http.post(this.loginUrl, { password, username }, { withCredentials: true }).subscribe({
             next: (response) => {
                 console.log("Login request sent successfully:", response);
                 // Handle token

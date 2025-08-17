@@ -1,21 +1,23 @@
 <div class="container">
   <div class="register-box">
     <h2>Register</h2>
-    <form>
+    <form (ngSubmit)="register()" #registerForm="ngForm" autocomplete="on">
 
       <label for="username">Username</label>
-      <input id="username" type="text" placeholder="Enter username" />
+      <input type="text" name="username" [(ngModel)]="username" placeholder="Username" required autocomplete="username"
+        maxlength="100" minlength="3" pattern="[a-zA-Z0-9_]+" />
 
       <label for="email">Email</label>
       <input id="email" type="email" placeholder="Enter email" />
 
       <label for="password">Password</label>
-      <input id="password" type="password" placeholder="Enter password" />
+      <input type="password" name="password" [(ngModel)]="password" placeholder="Password" required
+        autocomplete="current-password" maxlength="64" minlength="8" />
 
       <label for="confirmPassword">Confirm Password</label>
       <input id="confirmPassword" type="password" placeholder="Confirm password" />
 
-      <button type="submit">Sign Up</button>
+      <button (click)="register()" type="submit">Sign Up</button>
     </form>
     <p class="login-link">
       Already have an account? <a href="#">Login</a>

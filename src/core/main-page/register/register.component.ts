@@ -2,6 +2,7 @@ import { Component, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { HttpClient } from "@angular/common/http";
+import { RegisterInterface } from "../RegisterInterface";
 
 @Component({
     selector: "app-register-page",
@@ -12,7 +13,11 @@ import { HttpClient } from "@angular/common/http";
 })
 export class RegisterComponent {
     private http = inject(HttpClient);
-
+    private registerInterface: RegisterInterface = new RegisterInterface();
+    private readonly registerUrl = this.registerInterface.getRegisterUrl() + '/register/';
+    username: string = '';
+    password: string = '';
+    
     register() {
         console.log("Register function called");
 

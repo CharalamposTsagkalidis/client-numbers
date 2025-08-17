@@ -9,6 +9,7 @@ import { RouterModule } from "@angular/router";
       <a routerLink="/" routerLinkActive="active">Main Page</a> |
       <a routerLink="/app" routerLinkActive="active">App Page</a>g
       <a routerLink="/login" routerLinkActive="active">Login Page</a>
+      <a routerLink="/register" routerLinkActive="active">Register Page</a>
     </nav>
     <hr />
     <router-outlet></router-outlet>

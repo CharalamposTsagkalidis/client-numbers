@@ -1,7 +1,7 @@
 <div class="container">
   <div class="register-box">
     <h2>Register</h2>
-    <form (ngSubmit)="register()" #registerForm="ngForm" autocomplete="on">
+    <form (ngSubmit)="register(username, password, email)" #registerForm="ngForm" autocomplete="on">
 
       <label for="username">Username</label>
       <input type="text" name="username" [(ngModel)]="username" (ngModelChange)="onUsernameInput($event)"
@@ -41,7 +41,7 @@
       <label for="confirmPassword">Confirm Password</label>
       <input id="confirmPassword" type="password" placeholder="Confirm password" />
 
-      <button (click)="register()" type="submit">Sign Up</button>
+
     </form>
     <p class="login-link">
       Already have an account? <a href="#">Login</a>

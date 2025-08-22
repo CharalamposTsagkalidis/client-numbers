@@ -122,14 +122,14 @@ export class RegisterComponent {
         return true;
     }
 
-    register() {
-        console.log("Register function called");
-    }
+    // register(username: string, password: string, email: string) {
+    //     this.sendRegisterRequest(username, password, email);
+    // }
 
     checkIfPasswordsMatch(): boolean {
         return this.password === this.confirmPassword;
     }
-    sendRegisterRequest(username: string, password: string, email: string) {
+    register(username: string, password: string, email: string) {
         if (!this.checkIfPasswordsMatch()) return;
         this.http.post(this.registerUrl, { password, username, email }, { withCredentials: true })
             .subscribe({

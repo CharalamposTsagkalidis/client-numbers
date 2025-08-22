@@ -55,11 +55,13 @@ export class RegisterComponent {
                 // switchMap(email => this.checkEmail(email))
             )
             .subscribe(
-                {
-                    //   next: existEmail => {
-                    //     this.emailExists = existEmail;
-                    //}
 
+                //   next: existEmail => {
+                //     this.emailExists = existEmail;
+                //}
+
+                (email) => {
+                    this.checkEmail(email);
                 }
             );
     }
@@ -88,15 +90,29 @@ export class RegisterComponent {
             });
 
     }
-
-    checkUsername(username: string): Observable<boolean> {
-        return this.http.post<boolean>(this.registerUrl + '/check-username', { username: username });
+    checkEmail(email: string) {
+        if (email === '' || email === null || email === undefined) {
+            this.emailExists = null; // Reset the email existence check
+            return;
+        }
+        this.http.post<boolean>(this.checkEmailUrl, { email: email })
+            .subscribe({
+                next: (response) => {
+                    this.emailExists = response;
+                },
+                error: (error) => {
+                    console.error("Error checking email:", error);
+                }
+            });
     }
+    // checkUsername(username: string): Observable<boolean> {
+    //     return this.http.post<boolean>(this.registerUrl + '/check-username', { username: username });
+    // }
 
-    checkEmail(email: string): Observable<boolean> {
-        this.response = this.http.post<boolean>(this.checkEmailUrl, { email: email });
-        return this.response;
-    }
+    // checkEmail(email: string): Observable<boolean> {
+    //     this.response = this.http.post<boolean>(this.checkEmailUrl, { email: email });
+    //     return this.response;
+    // }
 
     checkIfPLaceholderOfUsernameisEmpty(username: string): boolean {
         if (username === '') {

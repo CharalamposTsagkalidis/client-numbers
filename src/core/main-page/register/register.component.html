@@ -15,10 +15,6 @@
         Username is available.
       </div>
 
-      <div *ngIf="usernameExists === null" class="null-message">
-        Please enter a username.
-      </div>
-
       <label for="email">Email</label>
       <input id="email" type="email" placeholder="Enter email" [(ngModel)]="email"
         (ngModelChange)="onEmailInput($event)" required autocomplete="email" maxlength="100" minlength="7"
@@ -31,6 +27,8 @@
       <div *ngIf="emailExists === false" class="success-message" style="color: green;">
         Email is available.
       </div>
+
+
 
       <div *ngIf="emailExists === null" class="null-message">
 

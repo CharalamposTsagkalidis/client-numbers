@@ -2,7 +2,7 @@
   <div class="register-box">
     <h2>Register</h2>
     <form (ngSubmit)="register(username, password, email)" #registerForm="ngForm" autocomplete="on">
-
+      
       <label for="username">Username</label>
       <input type="text" name="username" [(ngModel)]="username" (ngModelChange)="onUsernameInput($event)"
         placeholder="Username" required autocomplete="username" maxlength="100" minlength="3" pattern="[a-zA-Z0-9_]+" />

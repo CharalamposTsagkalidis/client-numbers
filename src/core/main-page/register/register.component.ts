@@ -6,8 +6,8 @@ import { RegisterInterface } from "../RegisterInterface";
 import { Subject } from "rxjs/internal/Subject";
 import { distinctUntilChanged } from "rxjs/internal/operators/distinctUntilChanged";
 import { debounceTime } from "rxjs/internal/operators/debounceTime";
-import { filter, Observable, switchMap } from "rxjs";
-
+import { filter, from, Observable, switchMap } from "rxjs";
+import { NgForm } from "@angular/forms";
 @Component({
     selector: "app-register-page",
     standalone: true,
@@ -131,10 +131,12 @@ export class RegisterComponent {
     }
     register(username: string, password: string, email: string) {
         if (!this.checkIfPasswordsMatch()) return;
-        this.http.post(this.registerUrl+"/", { password, username, email }, { withCredentials: true })
+        this.http.post(this.registerUrl + "/", { password, username, email }, { withCredentials: true })
             .subscribe({
                 next: (response) => {
                     console.log("Registration successful:", response);
+                    // You might want to redirect the user to a login page or show a success message here
+
                 },
                 error: (error) => {
                     console.error("Registration failed:", error);

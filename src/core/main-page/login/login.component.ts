@@ -18,9 +18,9 @@ export class LoginComponent {
     private readonly loginUrl1 = "http://localhost:8080/api/login/";
     username: string = '';
     password: string = '';
+    loginFailed: boolean | null = null;
 
-
-    loginFailed() {
+    getLoginFailed() {
         console.log("Login failed. Please check your credentials.");
         // this.username = '';
         // this.password = '';
@@ -76,11 +76,13 @@ export class LoginComponent {
             next: (response) => {
                 console.log("Login request sent successfully:", response);
                 // Handle token
-                
+
             },
             error: (error) => {
                 console.error("Error sending login request:", error);
-                this.loginFailed();
+                if (error.status === 400 || error.status === 401) {
+                    this.loginFailed = true;
+                }
             }
         });
     }
@@ -90,7 +92,7 @@ export class LoginComponent {
             this.sendLoginRequest(this.password, this.username);
             console.log("Login successful for user:", this.username);
         } else {
-            this.loginFailed();
+            this.loginFailed = true;
             console.log("Login failed. Password does not meet requirements.");
         }
     }

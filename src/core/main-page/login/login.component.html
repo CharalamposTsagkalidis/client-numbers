@@ -30,5 +30,5 @@
   <button (click)="login()" type="submit">Login</button>
 </form>
 
-<div *ngIf="loginFailed" style="color:red" >Invalid username or password</div>
+<div *ngIf="loginFailed === true"  [(ngModel)]="loginFailed" class="error-message"  style="color:red" >Invalid username or password</div>
 

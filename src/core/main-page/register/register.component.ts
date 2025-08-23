@@ -131,7 +131,7 @@ export class RegisterComponent {
     }
     register(username: string, password: string, email: string) {
         if (!this.checkIfPasswordsMatch()) return;
-        this.http.post(this.registerUrl, { password, username, email }, { withCredentials: true })
+        this.http.post(this.registerUrl+"/", { password, username, email }, { withCredentials: true })
             .subscribe({
                 next: (response) => {
                     console.log("Registration successful:", response);
@@ -140,6 +140,37 @@ export class RegisterComponent {
                     console.error("Registration failed:", error);
                 }
             });
+    }
+
+
+    getPasswordStrength(): 'weak' | 'medium' | 'strong' | 'empty' {
+        const pwd = this.password;
+        if (!pwd || pwd.length === 0) return 'empty';
+        let score = 0;
+        if (pwd.length >= 8) score++;
+        if (/[0-9]/.test(pwd) || /[!@#$%^&*]/.test(pwd)) score++;
+        if (/[A-Z]/.test(pwd)) score++;
+        if (score <= 1) return "weak";
+        if (score === 2) return "medium";
+        if (score >= 3) return "strong";
+        return 'empty';
+    }
+
+
+    hasMinLength(password: string): boolean {
+        if (password.length < 8) {
+            return false;
+        }
+        return true;
+
+    }
+
+    hasUppercase(password: string): boolean {
+        return /[A-Z]/.test(password);
+    }
+
+    hasSymbolOrNumber(password: string): boolean {
+        return /[0-9!@#$%^&*(),.?":{}|<>]/.test(password);
     }
 
 }

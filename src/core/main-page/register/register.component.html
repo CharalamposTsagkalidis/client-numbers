@@ -16,7 +16,7 @@
       </div>
 
       <label for="email">Email</label>
-      <input id="email" type="email" placeholder="Enter email" [(ngModel)]="email"
+      <input id="email" name="email" type="email" placeholder="Enter email" [(ngModel)]="email"
         (ngModelChange)="onEmailInput($event)" required autocomplete="email" maxlength="100" minlength="7"
         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="email" />
 
@@ -38,10 +38,38 @@
       <input type="password" name="password" [(ngModel)]="password" placeholder="Password" required
         autocomplete="current-password" maxlength="64" minlength="8" />
 
+      <div *ngIf="password">
+        <div class="strenght-bar">
+          <div class="strenght-level" [ngClass]="getPasswordStrength()">
+
+
+          </div>
+
+        </div>
+
+
+        <p class="strenght-label">
+          Strength: {{ getPasswordStrength() | titlecase }}
+        </p>
+
+      </div>
+
+      <ul class="password-rules">
+        <li [class.valid]="hasMinLength">✔ At least 8 characters</li>
+        <li [class.valid]="hasUppercase">✔ At least one uppercase letter</li>
+        <li [class.valid]="hasSymbolOrNumber">✔ At least one number or symbol</li>
+      </ul>
+
+
       <label for="confirmPassword">Confirm Password</label>
-      <input id="confirmPassword" type="password" placeholder="Confirm password" />
-
-
+      <input id="confirmPassword" name="confirmPassword" type="password" placeholder="Confirm password" [(ngModel)]="confirmPassword" required/>
+      <div *ngIf="!checkIfPasswordsMatch()" class="error-message" style="color: red;"> 
+        Passwords do not match
+      </div>
+      <button type="submit" [disabled]="!registerForm.form.valid || !checkIfPasswordsMatch() || usernameExists || emailExists === true">Register</button>
+      <!-- <div *ngIf="registrationFailed" class="error-message" style="color: red;">
+        Registration failed. Please try again.
+      </div> -->
     </form>
     <p class="login-link">
       Already have an account? <a href="#">Login</a>

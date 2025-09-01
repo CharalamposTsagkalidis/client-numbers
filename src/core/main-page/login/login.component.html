@@ -1,24 +1,19 @@
 <form (ngSubmit)="login()" #loginForm="ngForm" autocomplete="on">
-  <input type="text" name="username" [(ngModel)]="username" placeholder="Username" required
-    autocomplete="username" maxlength="100" minlength="3" pattern="[a-zA-Z0-9_]+"
-  />
-  <input type="password" name="password" [(ngModel)]="password" placeholder="Password" required 
-    autocomplete="current-password" maxlength="64" minlength="8"
-  />
-  <div *ngIf="password">
-    <div class="strenght-bar">
-      <div class="strenght-level"  [ngClass] = "getPasswordStrength()">
-     
+  <input type="text" name="username" [(ngModel)]="username" placeholder="Username" required autocomplete="username"
+    maxlength="100" minlength="3" pattern="[a-zA-Z0-9_]+" />
+  <input type="password" name="password" [(ngModel)]="password" placeholder="Password" required
+    autocomplete="current-password" maxlength="64" minlength="8" />
 
-      </div>
-
-    </div>
-
-<p class="strenght-label">
-  Strength: {{ getPasswordStrength() | titlecase }}
-</p>
+  @if(password) {
+  <div class="strenght-bar">
+    <div class="strenght-level" [ngClass]="getPasswordStrength()"></div>
 
   </div>
+
+  <p class="strenght-label">
+    Strength: {{ getPasswordStrength() | titlecase }}
+  </p>
+  }
 
   <ul class="password-rules">
     <li [class.valid]="hasMinLength">✔ At least 8 characters</li>
@@ -30,5 +25,7 @@
   <button (click)="login()" type="submit">Login</button>
 </form>
 
-<div *ngIf="loginFailed === true"  [(ngModel)]="loginFailed" class="error-message"  style="color:red" >Invalid username or password</div>
-
+@if(loginFailed === true) {
+<div class="error-message" style="color:red" [(ngModel)]="loginFailed">Invalid username or password</div>
+}
+<!-- <div *ngIf="loginFailed === true"  [(ngModel)]="loginFailed" class="error-message"  style="color:red" >Invalid username or password</div> -->

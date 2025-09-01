@@ -2,43 +2,65 @@
   <div class="register-box">
     <h2>Register</h2>
     <form (ngSubmit)="register(username, password, email)" #registerForm="ngForm" autocomplete="on">
-      
+
       <label for="username">Username</label>
       <input type="text" name="username" [(ngModel)]="username" (ngModelChange)="onUsernameInput($event)"
         placeholder="Username" required autocomplete="username" maxlength="100" minlength="3" pattern="[a-zA-Z0-9_]+" />
 
-      <div *ngIf="usernameExists === true" class="error-message" style="color: red;">
+      @if(usernameExists === true) {
+      <div class="error-message" style="color: red;">
+        Username already exists. Please choose another one.
+      </div>
+
+      }@else if(usernameExists === false) {
+      <div class="success-message" style="color: green;">
+        Username is available.
+      </div>
+      }
+
+      <!-- <div *ngIf="usernameExists === true" class="error-message" style="color: red;">
         Username already exists. Please choose another one.
       </div>
 
       <div *ngIf="usernameExists === false" class="success-message" style="color: green;">
         Username is available.
-      </div>
+      </div> -->
 
       <label for="email">Email</label>
       <input id="email" name="email" type="email" placeholder="Enter email" [(ngModel)]="email"
         (ngModelChange)="onEmailInput($event)" required autocomplete="email" maxlength="100" minlength="7"
         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="email" />
 
-      <div *ngIf="emailExists === true" class="error-message" style="color: red;">
+      @if(emailExists === true) {
+      <div class="error-message" style="color: red;">
         Email already exists. Please choose another one.
       </div>
-
-      <div *ngIf="emailExists === false" class="success-message" style="color: green;">
+      } @else if(emailExists === false) {
+      <div class="success-message" style="color: green;">
         Email is available.
       </div>
-
-
-
-      <div *ngIf="emailExists === null" class="null-message">
+      } @else if (emailExists === null) {
+      <div class="null-message">
 
       </div>
+      }
 
       <label for="password">Password</label>
       <input type="password" name="password" [(ngModel)]="password" placeholder="Password" required
         autocomplete="current-password" maxlength="64" minlength="8" />
 
-      <div *ngIf="password">
+      @if(password) {
+      <div class="strenght-bar">
+        <div class="strenght-level" [ngClass]="getPasswordStrength()">
+
+        </div>
+      </div>
+      <p class="strenght-label">
+        Strength: {{ getPasswordStrength() | titlecase }}
+      </p>
+      }
+
+      <!-- <div *ngIf="password">
         <div class="strenght-bar">
           <div class="strenght-level" [ngClass]="getPasswordStrength()">
 
@@ -52,7 +74,7 @@
           Strength: {{ getPasswordStrength() | titlecase }}
         </p>
 
-      </div>
+      </div> -->
 
       <ul class="password-rules">
         <li [class.valid]="hasMinLength">✔ At least 8 characters</li>
@@ -62,11 +84,30 @@
 
 
       <label for="confirmPassword">Confirm Password</label>
-      <input id="confirmPassword" name="confirmPassword" type="password" placeholder="Confirm password" [(ngModel)]="confirmPassword" required/>
-      <div *ngIf="!checkIfPasswordsMatch()" class="error-message" style="color: red;"> 
+      <input id="confirmPassword" name="confirmPassword" type="password" placeholder="Confirm password"
+        [(ngModel)]="confirmPassword" required />
+
+      @if(!checkIfPasswordsMatch()) {
+      <div class="error-message" style="color: red;">
         Passwords do not match
+
       </div>
-      <button type="submit" [disabled]="!registerForm.form.valid || !checkIfPasswordsMatch() || usernameExists || emailExists === true">Register</button>
+      }
+
+      <!-- <div *ngIf="!checkIfPasswordsMatch()" class="error-message" style="color: red;">
+        Passwords do not match
+      </div> -->
+      <button type="submit"
+        [disabled]="!registerForm.form.valid || !checkIfPasswordsMatch() || usernameExists || emailExists === true">Register</button>
+
+
+        @if(submitted) {
+          <p>
+            Form submitted!
+          </p>
+        }
+      <!-- <p *ngIf="submitted">Form submitted!</p> -->
+
       <!-- <div *ngIf="registrationFailed" class="error-message" style="color: red;">
         Registration failed. Please try again.
       </div> -->

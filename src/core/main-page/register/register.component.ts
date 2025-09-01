@@ -30,6 +30,14 @@ export class RegisterComponent {
     response: any;
     private usernameSubject = new Subject<string>();
     private emailSubject = new Subject<string>();
+    submitted: boolean = false;
+
+     onSubmit(form: NgForm) {
+         this.submitted = true;
+         this.register(this.username, this.password, this.email);
+         // Optionally reset the form after submission
+         // form.resetForm();
+     }
     constructor() {
         this.usernameSubject
             .pipe(
